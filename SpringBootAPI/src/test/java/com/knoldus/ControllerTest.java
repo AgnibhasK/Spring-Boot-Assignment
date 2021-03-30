@@ -1,8 +1,11 @@
 package com.knoldus;
 
+import org.junit.jupiter.api.Assertions;
+
 import static org.junit.Assert.assertEquals;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class ControllerTest {
@@ -11,10 +14,9 @@ public class ControllerTest {
     public void showRunningTest() {
         Controller instance = new Controller();
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
-        String formatDateTime = now.format(formatter);
-
-        assertEquals(instance.showRunning(), "Running, " + formatDateTime);
+        LocalTime localTime = LocalTime.now();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm:ss");
+        String str = "Running, {" + localTime.format(dtf) + "}";
+        Assertions.assertEquals(str,instance.showRunning());
     }
 }
